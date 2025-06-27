@@ -1,0 +1,1899 @@
+
+<!DOCTYPE html>
+<html lang="en"> <!-- Added lang attribute and class for dark mode -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Required Meta Tags -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>Market Research Hub 🎯 | AI-Powered Consumer Insights Platform</title>
+    <meta name="description" content="Get real-time market intelligence, consumer behavior analytics, and competitive benchmarking with our AI-driven research platform. Start with free industry reports.">
+    <meta name="keywords" content="market research, consumer insights, competitive analysis, industry trends, business intelligence, AI analytics">
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://bucket.mlcdn.com/a/3336/3336910/images/f221856a81ddf6731e6e4ff738772c8f608f11b8.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://bucket.mlcdn.com/a/3336/3336910/images/f221856a81ddf6731e6e4ff738772c8f608f11b8.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://bucket.mlcdn.com/a/3336/3336910/images/f221856a81ddf6731e6e4ff738772c8f608f11b8.png">
+    <link rel="manifest" href="https://bucket.mlcdn.com/a/3336/3336910/images/f221856a81ddf6731e6e4ff738772c8f608f11b8.png">
+    <link rel="mask-icon" href="https://bucket.mlcdn.com/a/3336/3336910/images/f221856a81ddf6731e6e4ff738772c8f608f11b8.png" color="#3a86ff">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#ffffff" id="theme-color-meta"> <!-- Added ID for JS update -->
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marketresearchhub.com/">
+    <meta property="og:title" content="Market Research Hub | AI-Powered Consumer Insights">
+    <meta property="og:description" content="Get real-time market intelligence and consumer behavior analytics with our AI-driven platform.">
+    <meta property="og:image" content="https://marketresearchhub.com/images/social-share-1200x630.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@ResearchHub">
+    <meta name="twitter:title" content="Market Research Hub | AI-Powered Consumer Insights">
+    <meta name="twitter:description" content="Real-time market intelligence and consumer behavior analytics platform.">
+    <meta name="twitter:image" content="https://marketresearchhub.com/images/social-share-1200x630.jpg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    
+    <script>
+      if (window.tailwind) {
+        window.tailwind.config = {
+            darkMode: 'class', // Enabled dark mode
+            theme: {
+                extend: {
+                    colors: {
+                        pink: {
+                            600: '#DF1783',
+                            700: '#C1146E'
+                        }
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        caveat: ['Caveat', 'cursive'],
+                    }
+                },
+            },
+        };
+      }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        :root {
+            --primary: #3a86ff;
+            --primary-dark: #2667cc;
+            --secondary: #8338ec;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+        }
+        
+        .custom-image-widget {
+            position: fixed !important;
+            top: 50px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            right: 0px;
+            z-index: 999;
+        }
+        
+        .custom-image {
+            width: 70px;
+            height: auto;
+            transition: transform 0.2s;
+        }
+        
+        .custom-image-widget:hover .custom-image {
+            transform: scale(1.05);
+        }
+        
+        .custom-image-widget:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-content.active {
+            max-height: 2000px; 
+            transition: max-height 0.3s ease-in;
+        }
+        .tool-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        html.dark .tool-card:hover {
+            box-shadow: 0 10px 25px rgba(255,255,255,0.05);
+        }
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+        
+        /* Updated Timeline Styles START */
+        .timeline-marker {
+            position: absolute;
+            left: 2px; /* From user's 'correct' CSS for marker */
+            top: 1.5rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 9999px;
+            background: #DF1783; /* Use 'background' as in 'correct' CSS */
+            border: 4px solid #f8fafc; /* Base light mode border */
+            box-sizing: content-box;
+            transform: translateX(-50%); /* From 'correct' CSS, applies to all sizes */
+            z-index: 10; /* Retained from original full file */
+        }
+        html.dark .timeline-marker {
+            background: #db2777; /* Dark mode background override */
+            border: 4px solid #1f2937; /* Dark mode border */
+        }
+        @media (min-width: 640px) {
+            .timeline-marker {
+                left: 6.5rem; /* From user's 'correct' CSS for marker */
+            }
+        }
+
+        .timeline-item {
+            position: relative;
+        }
+        
+        .timeline-item:not(:last-child):before { /* Use :before and :not(:last-child) */
+            content: '';
+            position: absolute;
+            left: 50%; /* From user's 'correct' CSS for line (mobile) */
+            top: 0;
+            height: 100%;
+            width: 1px; /* From user's 'correct' CSS for line */
+            background: #e2e8f0; /* From user's 'correct' CSS for line */
+            transform: translateX(-50%); /* From user's 'correct' CSS for line (mobile), keep for desktop too to align with marker logic */
+        }
+        html.dark .timeline-item:not(:last-child):before {
+            background: #374151; /* Dark mode for line */
+        }
+        @media (min-width: 640px) {
+            .timeline-item:not(:last-child):before {
+                left: 6.5rem; /* From user's 'correct' CSS for line (desktop) */
+            }
+        }
+        /* Updated Timeline Styles END */
+
+        #back-to-top {
+            position: fixed;
+            bottom: 80px; 
+            right: 45px;
+            display: none;
+            cursor: pointer;
+            z-index: 1000; 
+        }
+        
+        /* New container styling for consistent width */
+        .container-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Timeline specific width constraints */
+        .timeline-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* Header styling */
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #db2777, #9333ea);
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.1.0/"
+  }
+}
+</script>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-slate-200 transition-colors duration-300">
+    
+    <div class="custom-image-widget" style="position: relative; display: inline-block;">
+        <a href="https://bebell-digital-solutions.github.io/Market-Research-Hub/espanol">
+            <img class="custom-image" 
+                 src="https://bucket.mlcdn.com/a/3336/3336910/images/138f14304ea21715dfae64ae5fe1d71b08c2d451.png" 
+                 alt="English Translation"
+                 style="display: block;"> 
+        </a>
+    </div>
+    
+    <!-- Desktop Sidebar -->
+    <div id="sidebar" class="hidden lg:block fixed left-0 top-0 h-full w-80 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 shadow-lg overflow-y-auto z-10">
+        <div class="p-6">
+            <div class="mb-8">
+                <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
+                    <i data-lucide="search-check" class="w-6 h-6 text-white"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-2">Market Research Hub 🎯</h1>
+                <p class="text-gray-600 dark:text-slate-400 text-sm leading-relaxed">Your Complete Guide to Market Success</p>
+            </div>
+            
+            <nav class="space-y-2 mb-8">
+                <a href="#" onclick="showSection('overview')" class="nav-item active flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                    <i data-lucide="building-2" class="w-4 h-4 mr-3"></i>
+                    <span class="font-medium">Overview</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                </a>
+                <a href="#" onclick="showSection('market-investigation')" class="nav-item flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                    <i data-lucide="file-text" class="w-4 h-4 mr-3"></i>
+                    <span class="font-medium">Market Investigation</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                </a>
+                <a href="#" onclick="showSection('trend-identification')" class="nav-item flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                    <i data-lucide="file-text" class="w-4 h-4 mr-3"></i>
+                    <span class="font-medium">Trend & Niche ID</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                </a>
+                <a href="#" onclick="showSection('competitive-analysis')" class="nav-item flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                    <i data-lucide="file-text" class="w-4 h-4 mr-3"></i>
+                    <span class="font-medium">Competitive Analysis</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                </a>
+                <a href="#" onclick="showSection('product-validation')" class="nav-item flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                    <i data-lucide="file-text" class="w-4 h-4 mr-3"></i>
+                    <span class="font-medium">Product Validation</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                </a>
+                <a href="#" onclick="showSection('advanced-analysis')" class="nav-item flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                    <i data-lucide="file-text" class="w-4 h-4 mr-3"></i>
+                    <span class="font-medium">Advanced Analysis</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                </a>
+                <a href="#" onclick="showSection('tools-directory')" class="nav-item flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                    <i data-lucide="file-text" class="w-4 h-4 mr-3"></i>
+                    <span class="font-medium">Tools Directory</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                </a>
+            </nav>
+
+            <div class="border-t border-gray-200 dark:border-slate-700 pt-6">
+                <div class="mb-4">
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-slate-100 mb-2">📋 Research Template</h3>
+                    <p class="text-xs text-gray-600 dark:text-slate-400 mb-3">Get the comprehensive Notion template to organize your research findings</p>
+                    <button onclick="handleNotionAccess()" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                        <i data-lucide="external-link" class="w-4 h-4 mr-2"></i> Access Template
+                    </button>
+                </div>
+
+                <!-- Theme Toggle Button - Desktop -->
+                <div class="mt-4">
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-slate-100 mb-2">🎨 Theme</h3>
+                     <button id="theme-toggle-desktop" aria-label="Toggle theme" class="w-full text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center border border-gray-300 dark:border-slate-600">
+                        <i data-lucide="sun" class="w-4 h-4 mr-2 theme-icon-sun"></i>
+                        <i data-lucide="moon" class="w-4 h-4 mr-2 theme-icon-moon hidden"></i>
+                        <span id="theme-toggle-desktop-text">Switch Theme</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <div class="lg:hidden fixed top-4 left-4 z-50">
+        <button onclick="toggleMobileMenu()" aria-label="Toggle mobile menu" class="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-3 border border-gray-200 dark:border-slate-700">
+            <i id="mobile-menu-icon" data-lucide="menu" class="w-6 h-6 text-gray-600 dark:text-slate-300"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div id="mobile-overlay" class="lg:hidden fixed inset-0 z-40 hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-50 dark:bg-opacity-75" onclick="toggleMobileMenu()"></div>
+        <div id="mobile-sidebar" class="relative w-80 bg-white dark:bg-slate-800 h-full shadow-lg overflow-y-auto">
+            <div class="p-6">
+                <div class="mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="search-check" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-2">Market Research Hub 🚀</h1>
+                    <p class="text-gray-600 dark:text-slate-400 text-sm leading-relaxed">Your Complete Guide to Market Success</p>
+                </div>
+
+                <nav class="space-y-2 mb-8">
+                    <a href="#" onclick="showSection('overview'); toggleMobileMenu()" class="mobile-nav-item active flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                        <i data-lucide="building-2" class="w-4 h-4 mr-3"></i><span class="font-medium">Overview</span><i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                    </a>
+                    <a href="#" onclick="showSection('market-investigation'); toggleMobileMenu()" class="mobile-nav-item flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                        <i data-lucide="file-text" class="w-4 h-4 mr-3"></i><span class="font-medium">Market Investigation</span><i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                    </a>
+                    <a href="#" onclick="showSection('trend-identification'); toggleMobileMenu()" class="mobile-nav-item flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                        <i data-lucide="file-text" class="w-4 h-4 mr-3"></i><span class="font-medium">Trend & Niche ID</span><i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                    </a>
+                    <a href="#" onclick="showSection('competitive-analysis'); toggleMobileMenu()" class="mobile-nav-item flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                        <i data-lucide="file-text" class="w-4 h-4 mr-3"></i><span class="font-medium">Competitive Analysis</span><i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                    </a>
+                    <a href="#" onclick="showSection('product-validation'); toggleMobileMenu()" class="mobile-nav-item flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                        <i data-lucide="file-text" class="w-4 h-4 mr-3"></i><span class="font-medium">Product Validation</span><i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                    </a>
+                    <a href="#" onclick="showSection('advanced-analysis'); toggleMobileMenu()" class="mobile-nav-item flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                        <i data-lucide="file-text" class="w-4 h-4 mr-3"></i><span class="font-medium">Advanced Analysis</span><i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                    </a>
+                    <a href="#" onclick="showSection('tools-directory'); toggleMobileMenu()" class="mobile-nav-item flex items-center px-3 py-2 text-gray-700 dark:text-slate-300 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                        <i data-lucide="file-text" class="w-4 h-4 mr-3"></i><span class="font-medium">Tools Directory</span><i data-lucide="chevron-right" class="w-4 h-4 ml-auto"></i>
+                    </a>
+                </nav>
+
+                <div class="border-t border-gray-200 dark:border-slate-700 pt-6">
+                    <div class="mb-4">
+                        <h3 class="text-sm font-semibold text-gray-900 dark:text-slate-100 mb-2">📋 Research Template</h3>
+                        <p class="text-xs text-gray-600 dark:text-slate-400 mb-3">Get the comprehensive Notion template to organize your research findings</p>
+                        <button onclick="handleNotionAccess()" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                            <i data-lucide="external-link" class="w-4 h-4 mr-2"></i> Access Template
+                        </button>
+                    </div>
+                     <!-- Theme Toggle Button - Mobile -->
+                    <div class="mt-4">
+                        <h3 class="text-sm font-semibold text-gray-900 dark:text-slate-100 mb-2">🎨 Theme</h3>
+                        <button id="theme-toggle-mobile" aria-label="Toggle theme" class="w-full text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center border border-gray-300 dark:border-slate-600">
+                            <i data-lucide="sun" class="w-4 h-4 mr-2 theme-icon-sun"></i>
+                            <i data-lucide="moon" class="w-4 h-4 mr-2 theme-icon-moon hidden"></i>
+                            <span id="theme-toggle-mobile-text">Switch Theme</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="lg:ml-80 min-h-screen">
+        <div class="p-4 lg:p-8 pt-20 lg:pt-8">
+            
+            <div id="overview-section" class="content-section">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <br>
+                        <h1 class="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-slate-100 mb-6">
+                            Market Research
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">Dashboard</span>
+                        </h1>
+                        <p class="text-xl text-gray-600 dark:text-slate-400 max-w-3xl mx-auto mb-8">
+                            Your comprehensive guide to building a sustainable online business through strategic research and analysis. From idea validation to market launch.
+                        </p>
+                        
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="showSection('market-investigation')" class="bg-pink-600 hover:bg-pink-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                                🎯 Start Research Journey <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                            </button>
+                            <button onclick="handleNotionAccess()" class="border border-gray-300 dark:border-slate-600 hover:border-gray-400 dark:hover:border-slate-500 text-gray-700 dark:text-slate-300 font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                                📋 Get Notion Template <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                       <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-6 text-center">
+                            <div class="w-12 h-12 bg-pink-100 dark:bg-pink-900/50 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-pink-600 dark:text-pink-400">
+                                    <path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"/><path d="m8 6 2-2"/><path d="m18 16 2-2"/><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-1">22+</h3>
+                            <p class="text-gray-600 dark:text-slate-400 text-sm">Research Tools</p>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-6 text-center">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="layers" class="w-6 h-6 text-blue-600 dark:text-blue-400"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-1">5</h3>
+                            <p class="text-gray-600 dark:text-slate-400 text-sm">Research Phases</p>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-6 text-center">
+                            <div class="w-12 h-12 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="clock" class="w-6 h-6 text-green-600 dark:text-green-400"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-1">6-8</h3>
+                            <p class="text-gray-600 dark:text-slate-400 text-sm">Weeks Process</p>
+                        </div>
+                        <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-6 text-center">
+                            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="target" class="w-6 h-6 text-purple-600 dark:text-purple-400"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-1">100%</h3>
+                            <p class="text-gray-600 dark:text-slate-400 text-sm">Success Rate</p>
+                        </div>
+                    </div>
+                    
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-8 mb-12">
+                        <h2 class="text-5xl font-bold text-gray-900 dark:text-slate-100 tracking-tight mb-7 mt-8 text-center">
+                            🎯 Market Research <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">Process</span>
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                            <div class="text-center" onclick="showSection('market-investigation')">
+                                <div class="w-16 h-16 bg-pink-100 dark:bg-pink-900/50 rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-pink-200 dark:hover:bg-pink-800/60 transition-colors">
+                                    <span class="text-2xl">🔍</span>
+                                </div>
+                                <h3 class="font-semibold text-gray-900 dark:text-slate-100 mb-2">Market Investigation</h3>
+                                <p class="text-sm text-gray-600 dark:text-slate-400">Understanding your market landscape and opportunities</p>
+                            </div>
+                            <div class="text-center" onclick="showSection('trend-identification')">
+                                <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-blue-200 dark:hover:bg-blue-800/60 transition-colors">
+                                    <span class="text-2xl">📈</span>
+                                </div>
+                                <h3 class="font-semibold text-gray-900 dark:text-slate-100 mb-2">Trend Analysis</h3>
+                                <p class="text-sm text-gray-600 dark:text-slate-400">Discovering trending opportunities and market gaps</p>
+                            </div>
+                            <div class="text-center" onclick="showSection('competitive-analysis')">
+                                <div class="w-16 h-16 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-green-200 dark:hover:bg-green-800/60 transition-colors">
+                                    <span class="text-2xl">🏆</span>
+                                </div>
+                                <h3 class="font-semibold text-gray-900 dark:text-slate-100 mb-2">Competitive Intelligence</h3>
+                                <p class="text-sm text-gray-600 dark:text-slate-400">Analyzing competitors and market positioning</p>
+                            </div>
+                            <div class="text-center" onclick="showSection('product-validation')">
+                                <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/50 rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-purple-200 dark:hover:bg-purple-800/60 transition-colors">
+                                    <span class="text-2xl">✅</span>
+                                </div>
+                                <h3 class="font-semibold text-gray-900 dark:text-slate-100 mb-2">Product Validation</h3>
+                                <p class="text-sm text-gray-600 dark:text-slate-400">Validating product demand and pricing strategies</p>
+                            </div>
+                            <div class="text-center" onclick="showSection('advanced-analysis')">
+                                <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900/50 rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-yellow-200 dark:hover:bg-yellow-800/60 transition-colors">
+                                    <span class="text-2xl">🔬</span>
+                                </div>
+                                <h3 class="font-semibold text-gray-900 dark:text-slate-100 mb-2">Advanced Analysis</h3>
+                                <p class="text-sm text-gray-600 dark:text-slate-400 mb-8">Deep research and document analysis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                
+               <!-- Fixed Timeline Section -->
+        <div class="max-w-6xl mx-auto bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-200 dark:border-slate-700 p-6 sm:p-8 mb-10">
+            <div class="section-header">
+                <h2 class="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-slate-100 tracking-tight">
+                    ⏳ Market Research <span class="gradient-text">Timeline</span>
+                </h2>
+            </div>
+            
+            <!-- Timeline container with fixed width -->
+            
+            
+            
+ <div class="flex justify-center">
+        <div class="w-full max-w-4xl"> <!-- Increased max-width for timeline content -->
+        
+     
+                <div class="space-y-8 mt-6">
+                <!-- Phase 1 -->
+                <div class="relative pl-8 sm:pl-32 py-6 group timeline-item">
+                    <div class="font-caveat font-medium text-2xl text-pink-600 dark:text-pink-400 mb-1 sm:mb-0">Phase 1</div>
+                    <div class="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden">
+                        <time class="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-pink-600 bg-pink-100 dark:text-pink-200 dark:bg-pink-700/50 rounded-full">Week 1-2</time>
+                        <div class="text-xl font-bold text-slate-900 dark:text-slate-100">Market Investigation</div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                    <div class="text-slate-600 dark:text-slate-400">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Define your target market and customer personas</li>
+                            <li>Analyze market size and growth potential</li>
+                            <li>Identify key market trends and dynamics</li>
+                            <li>Conduct SWOT analysis of the market</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Phase 2 -->
+                <div class="relative pl-8 sm:pl-32 py-6 group timeline-item">
+                    <div class="font-caveat font-medium text-2xl text-pink-600 dark:text-pink-400 mb-1 sm:mb-0">Phase 2</div>
+                    <div class="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden">
+                        <time class="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-pink-600 bg-pink-100 dark:text-pink-200 dark:bg-pink-700/50 rounded-full">Week 3-4</time>
+                        <div class="text-xl font-bold text-slate-900 dark:text-slate-100">Trend & Niche Identification</div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                    <div class="text-slate-600 dark:text-slate-400">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Identify emerging trends in your industry</li>
+                            <li>Discover profitable niche opportunities</li>
+                            <li>Analyze search trends and social media buzz</li>
+                            <li>Validate demand through keyword research</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Phase 3 -->
+                <div class="relative pl-8 sm:pl-32 py-6 group timeline-item">
+                    <div class="font-caveat font-medium text-2xl text-pink-600 dark:text-pink-400 mb-1 sm:mb-0">Phase 3</div>
+                    <div class="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden">
+                        <time class="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-pink-600 bg-pink-100 dark:text-pink-200 dark:bg-pink-700/50 rounded-full">Week 5-6</time>
+                        <div class="text-xl font-bold text-slate-900 dark:text-slate-100">Competitive Analysis</div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                    <div class="text-slate-600 dark:text-slate-400">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Identify direct and indirect competitors</li>
+                            <li>Analyze competitor strengths and weaknesses</li>
+                            <li>Map competitor pricing and positioning</li>
+                            <li>Identify gaps in the competitive landscape</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Phase 4 -->
+                <div class="relative pl-8 sm:pl-32 py-6 group timeline-item">
+                    <div class="font-caveat font-medium text-2xl text-pink-600 dark:text-pink-400 mb-1 sm:mb-0">Phase 4</div>
+                    <div class="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden">
+                        <time class="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-pink-600 bg-pink-100 dark:text-pink-200 dark:bg-pink-700/50 rounded-full">Week 7</time>
+                        <div class="text-xl font-bold text-slate-900 dark:text-slate-100">Product Validation</div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                    <div class="text-slate-600 dark:text-slate-400">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Validate product-market fit</li>
+                            <li>Test pricing strategies</li>
+                            <li>Gather early customer feedback</li>
+                            <li>Conduct pre-launch surveys</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Phase 5 -->
+                <div class="relative pl-8 sm:pl-32 py-6 group timeline-item">
+                    <div class="font-caveat font-medium text-2xl text-pink-600 dark:text-pink-400 mb-1 sm:mb-0">Phase 5</div>
+                    <div class="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden">
+                        <time class="sm:absolute left-0 translate-y-0.5 inline-flex items-center justify-center text-xs font-semibold uppercase w-20 h-6 mb-3 sm:mb-0 text-pink-600 bg-pink-100 dark:text-pink-200 dark:bg-pink-700/50 rounded-full">Week 8</time>
+                        <div class="text-xl font-bold text-slate-900 dark:text-slate-100">Advanced Analysis & Strategy</div>
+                        <div class="timeline-marker"></div>
+                    </div>
+                    <div class="text-slate-600 dark:text-slate-400">
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Compile research findings into actionable insights</li>
+                            <li>Develop go-to-market strategy</li>
+                            <li>Create marketing and positioning recommendations</li>
+                            <li>Finalize research documentation</li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            
+                   
+        
+        
+                    <div class="flex flex-col mt-20 sm:flex-row gap-4 justify-center">
+                        <button onclick="showSection('market-investigation')" class="bg-pink-600 hover:bg-pink-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center">
+                            🎯 Let's Get Started <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </button>
+                    </div>
+                    <div class="mt-12">
+                      <img src="https://bucket.mlcdn.com/a/3336/3336910/images/0953b807d6a746d122e2ee8054b51fdc0a0aef14.png" alt="Market Research Banner" class="w-full h-auto object-cover rounded-lg" loading="lazy">
+                    </div>
+                    
+                    
+                    <div class="mt-0 bg-gradient-to-r from-pink-600 to-purple-600 py-12 px-4 sm:px-6 lg:px-8 rounded-lg shadow-lg">
+                      <div class="max-w-5xl mx-auto text-center">
+                        <blockquote class="text-white">
+                          <p class="text-xl sm:text-2xl font-medium italic leading-relaxed">
+                            "The secret of success in business is preparation, research, and hard work. 
+                            <span class="block mt-4 font-bold text-white/90">Good fortune is what happens when opportunity meets preparation.</span>
+                          </p>
+                          <footer class="mt-6 text-white/80">
+                            <cite class="font-semibold not-italic">— Zig Ziglar</cite>
+                          </footer>
+                        </blockquote>
+                      </div>
+                    </div>   
+                </div>
+
+        </div>
+        
+        
+        
+        
+        
+
+            </div>
+            
+            <div class="fixed bottom-0 right-0 w-full md:bottom-6 md:right-12 md:w-auto z-50" :class="bannerOpen ? '' : 'hidden'" x-data="{ bannerOpen: true, videoOpen: false }">
+                <div x-show="videoOpen" class="fixed inset-0 bg-black bg-opacity-75 dark:bg-opacity-85 z-50 flex items-center justify-center p-4" @click.away="videoOpen = false">
+                    <div class="relative w-full max-w-4xl bg-white dark:bg-slate-800 rounded-lg overflow-hidden">
+                        <button class="absolute top-2 right-2 z-50 text-white bg-black/50 hover:bg-black/75 rounded-full p-1" @click="videoOpen = false">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                            <span class="sr-only">Close video</span>
+                        </button>
+                        <div class="aspect-w-16 aspect-h-9">
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full h-[300px] md:h-[500px]"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-[#DF1783] text-sm p-3 md:rounded-lg shadow-lg flex justify-between">
+                    <div class="text-white inline-flex items-center">
+                        <img src="https://bucket.mlcdn.com/a/3336/3336910/images/2e79720ff0cbac4b6b430d701d053c11dfb48a79.gif" class="w-7 h-7 mr-2" alt="Bebell Digital Solutions Logo">
+                        <button class="font-medium hover:underline text-white" @click="videoOpen = true">Watch Tutorial</button>
+                        <span class="italic px-1.5">or</span>
+                        <a class="font-medium hover:underline text-white flex items-center" href="https://github.com/cruip/cruip-tutorials/blob/main/vertical-timelines/index.html" target="_blank" rel="noreferrer">
+                            <span>Download</span>
+                            <svg class="fill-white ml-1" xmlns="http://www.w3.org/2000/svg" width="9" height="9"><path d="m1.649 8.514-.91-.915 5.514-5.523H2.027l.01-1.258h6.388v6.394H7.158l.01-4.226z" /></svg>
+                        </a>
+                    </div>
+                    <button class="text-white hover:text-slate-200 pl-2 ml-3 border-l border-white/30" @click="bannerOpen = false">
+                        <span class="sr-only">Close</span>
+                        <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 16 16"><path d="M12.72 3.293a1 1 0 00-1.415 0L8.012 6.586 4.72 3.293a1 1 0 00-1.414 1.414L6.598 8l-3.293 3.293a1 1 0 101.414 1.414l3.293-3.293 3.293 3.293a1 1 0 001.414-1.414L9.426 8l3.293-3.293a1 1 0 000-1.414z" /></svg>
+                    </button>
+                </div>
+            </div>
+    
+            <div id="research-section" class="content-section hidden">
+                <div class="max-w-6xl mx-auto"> <!-- Added max-w-6xl mx-auto for consistent width -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-1">
+                            <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-6 sticky top-8">
+                                <h2 class="text-xl font-bold text-gray-900 dark:text-slate-100 mb-4 flex items-center">
+                                    <i data-lucide="check-square" class="w-5 h-5 mr-2 text-pink-600 dark:text-pink-400"></i> Research Progress
+                                </h2>
+                                <div class="space-y-4" id="progress-checklist"></div>
+                                <div class="mt-6 pt-4 border-t border-gray-200 dark:border-slate-700">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-medium text-gray-700 dark:text-slate-300">Overall Progress</span>
+                                        <span id="overall-progress-text" class="text-sm text-gray-500 dark:text-slate-400">0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2">
+                                        <div id="overall-progress-bar" class="progress-bar bg-pink-600 h-2 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <div id="research-accordion" class="space-y-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="tools-directory-section" class="content-section hidden">
+                <div class="max-w-6xl mx-auto">
+                    <div class="flex flex-col lg:flex-row gap-8">
+                        <div class="lg:w-1/4">
+                            <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-6 sticky top-8">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-4">🔍 Find Tools</h3>
+                                <div class="mb-4">
+                                    <input type="text" id="tool-search" placeholder="Search tools..." 
+                                           class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 dark:focus:ring-pink-500 focus:border-pink-500 dark:focus:border-pink-500 bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-200"
+                                           onkeyup="filterTools()">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Category</label>
+                                    <select id="category-filter" onchange="filterTools()" 
+                                            class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 dark:focus:ring-pink-500 focus:border-pink-500 dark:focus:border-pink-500 bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-200">
+                                        <option value="">All Categories</option>
+                                        <option value="Idea Validation">Idea Validation</option>
+                                        <option value="Market Research">Market Research</option>
+                                        <option value="Competitive Intelligence">Competitive Intelligence</option>
+                                        <option value="Trend Analysis">Trend Analysis</option>
+                                        <option value="Social Commerce Research">Social Commerce</option>
+                                        <option value="Product Research">Product Research</option>
+                                        <option value="Document Research">Document Research</option>
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">View</label>
+                                    <div class="flex bg-gray-100 dark:bg-slate-700 rounded-lg p-1">
+                                        <button onclick="setViewMode('grid')" id="grid-view-btn" class="flex-1 px-3 py-1 rounded-md bg-white dark:bg-slate-600 shadow-sm text-sm font-medium text-gray-700 dark:text-slate-200">Grid</button>
+                                        <button onclick="setViewMode('list')" id="list-view-btn" class="flex-1 px-3 py-1 rounded-md text-sm font-medium text-gray-700 dark:text-slate-300">List</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="lg:w-3/4">
+                            <div class="mb-6">
+                                <h1 class="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-2">🛠️ Research Tools Directory</h1>
+                                <p class="text-gray-600 dark:text-slate-400">Comprehensive collection of professional research tools for e-commerce entrepreneurs</p>
+                            </div>
+                            <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                   <div>
+                  <p class="mb-20 text-xs text-center my-2.5 text-gray-600 dark:text-slate-400">
+                    <br>Developed with 💖 by Bebell Digital Solutions.<br>
+                    Copyright © 2024 • All rights reserved
+                  </p>
+                </div> 
+            
+            
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    <div id="tool-modal" class="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-75 flex items-center justify-center z-50 p-4 hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-lg max-w-2xl max-h-[90vh] overflow-y-auto p-6 w-full">
+            <div class="flex justify-between items-center mb-4">
+                <h2 id="modal-title" class="text-2xl font-bold text-gray-900 dark:text-slate-100"></h2>
+                <button onclick="closeModal()" aria-label="Close modal" class="text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div id="modal-content" class="text-gray-600 dark:text-slate-300"></div>
+        </div>
+    </div>
+    
+    <div id="notion-modal" class="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-75 flex items-center justify-center z-50 p-4 hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-lg max-w-4xl max-h-[90vh] overflow-y-auto p-6 w-full">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-slate-100">📋 Notion Template Access</h2>
+                <button onclick="closeNotionModal()" aria-label="Close Notion modal" class="text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-3">📥 How to Import This Template to Notion:</h3>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700 dark:text-slate-300">
+                    <li>Copy the template content below</li>
+                    <li>Open Notion and create a new page</li>
+                    <li>Paste the content into your new page</li>
+                    <li>Notion will automatically format the tables and structure</li>
+                    <li>Customize fields and sections as needed for your business</li>
+                </ol>
+            </div>
+            <div class="mb-4">
+                <div class="flex gap-2 mb-2">
+                    <button onclick="copyTemplateToClipboard()" class="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">📋 Copy Template</button>
+                    <button onclick="downloadTemplateAsFile()" class="bg-gray-600 dark:bg-slate-600 hover:bg-gray-700 dark:hover:bg-slate-500 text-white px-4 py-2 rounded-lg font-medium transition-colors">💾 Download File</button>
+                </div>
+            </div>
+            <div class="border border-gray-200 dark:border-slate-700 rounded-lg p-4 bg-gray-50 dark:bg-slate-900 max-h-96 overflow-y-auto">
+                <pre id="notion-template-content" class="whitespace-pre-wrap text-sm text-gray-800 dark:text-slate-200"></pre>
+            </div>
+            <div class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+                <p class="text-blue-800 dark:text-blue-300 text-sm">
+                    <strong>💡 Pro Tip:</strong> After importing to Notion, you can convert text tables to database tables for better functionality. 
+                    Select the table, then choose "Turn into database" from the menu.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+
+    <div id="back-to-top" onclick="scrollToTop()">
+        <img src="https://bucket.mlcdn.com/a/3336/3336910/images/06e7b897a263640a2ce0a5ca1cdb561f3a0e6ab1.png" alt="Volver arriba" style="width: 40px; height: 40px;" class="dark:brightness-75 dark:hover:brightness-100">
+    </div>
+    
+    
+    
+    
+    
+    
+    
+
+    <script>
+        // JSDoc type declarations for global variables and functions
+        // These help linters and IDEs understand the JavaScript code better.
+
+        /** @type {any} */
+        var Alpine; // For Alpine.js, often attached to window
+
+        /** @type {Window & typeof globalThis & { confetti?: (options?: any) => void; lucide?: { createIcons: () => void; }; tailwind?: { config?: any; } }} */
+        const globalWindow = window;
+
+
+        /** @type { {id: string, name: string, url: string, purpose: string, category: string, timeEstimate: string, instructions: string[], whatToExtract: string, icon: string}[] } */
+        const researchTools = [ /* Data remains the same */
+             { id: "startup-ai", name: "Startup.ai", url: "https://startup.ai", purpose: "Startup idea generation and evaluation", category: "Idea Validation", timeEstimate: "30-45 minutes", instructions: [ "Visit startup.ai", "Browse evaluated startup ideas by category", "Filter by e-commerce/retail sectors", "Note trending business models", "Identify gaps in current market offerings" ], whatToExtract: "Validated business concepts, market gaps, trending sectors", icon: "lightbulb" }, { id: "validea", name: "Validea.co", url: "https://validea.co", purpose: "AI-powered business idea validation", category: "Idea Validation", timeEstimate: "20-30 minutes", instructions: [ "Input your business idea concept", "Answer validation questions about target market", "Review AI-generated feedback and scores", "Note suggested improvements and risks", "Save validation report for reference" ], whatToExtract: "Validation scores, risk assessment, improvement suggestions", icon: "check-circle" }, { id: "scira-ai", name: "Scira.ai", url: "https://scira.ai", purpose: "AI-powered search engine for research", category: "Market Research", timeEstimate: "15-20 minutes per search", instructions: [ "Search for industry-specific terms", "Use advanced filters for date range and source type", "Collect relevant market data and trends", "Save important findings with sources" ], whatToExtract: "Industry insights, market data, trend information", icon: "search" }, { id: "perplexity", name: "Perplexity.ai", url: "https://perplexity.ai", purpose: "Internet research with AI assistance", category: "Comprehensive Research", timeEstimate: "20-30 minutes per topic", instructions: [ "Ask specific questions about your market/niche", "Request sources and citations", "Follow up with related questions", "Export research findings", "Verify information with additional sources" ], whatToExtract: "Detailed market analysis, competitor information, industry trends", icon: "brain" }, { id: "particl-trends", name: "Particl Trends", url: "https://pitch.com/v/2025-particls-year-to-date-insights-dbckd6/b43ea207-c75e-4423-b07b-101e0e669c2a/", purpose: "Year-to-date market insights and trends", category: "Trend Analysis", timeEstimate: "25-35 minutes", instructions: [ "Access the Particl insights presentation", "Review category-specific trends", "Note seasonal patterns and emerging markets", "Identify growth opportunities", "Compare with your business idea alignment" ], whatToExtract: "Market trends, growth categories, seasonal insights", icon: "trending-up" }, { id: "answer-the-public", name: "AnswerThePublic", url: "https://answerthepublic.com", purpose: "Topic and keyword research", category: "Content & SEO Research", timeEstimate: "20-30 minutes", instructions: [ "Enter your main keyword/niche", "Select your target country/language", "Review 'What', 'How', 'Why' questions", "Note high-volume search queries", "Export data for content planning" ], whatToExtract: "Customer questions, content ideas, search volumes", icon: "help-circle" }, { id: "semrush", name: "Semrush", url: "https://semrush.com", purpose: "SEO and competitor analysis", category: "Competitive Intelligence", timeEstimate: "30-45 minutes", instructions: [ "Enter competitor domains", "Analyze their top keywords", "Review their advertising strategies", "Check backlink profiles", "Identify content gaps" ], whatToExtract: "Competitor keywords, ad strategies, market positioning", icon: "bar-chart" }, { id: "glimpse", name: "Glimpse", url: "https://meetglimpse.com/trends", purpose: "Google Trends analysis and predictions", category: "Trend Forecasting", timeEstimate: "25-35 minutes", instructions: [ "Search for relevant product categories", "Review trend graphs and predictions", "Analyze seasonal patterns", "Note emerging vs declining trends", "Export trend data" ], whatToExtract: "Trend predictions, seasonal patterns, market timing", icon: "activity" }, { id: "answer-socrates", name: "AnswerSocrates", url: "https://answersocrates.com", purpose: "Question-based keyword research", category: "Market Research", timeEstimate: "20-25 minutes", instructions: [ "Input your main keyword", "Review question categories", "Analyze search volume data", "Identify pain points and needs", "Save relevant questions for content strategy" ], whatToExtract: "Customer pain points, content opportunities, market needs", icon: "message-circle" }, { id: "particl", name: "Particl.com", url: "https://particl.com", purpose: "E-commerce market intelligence", category: "E-commerce Analytics", timeEstimate: "30-40 minutes", instructions: [ "Search for product categories in your niche", "Review market size and growth data", "Analyze brand performance metrics", "Note pricing trends and strategies", "Identify market opportunities" ], whatToExtract: "Market size, brand performance, pricing strategies", icon: "shopping-cart" }, { id: "similarweb", name: "SimilarWeb", url: "https://similarweb.com", purpose: "Website and competitor traffic analysis", category: "Competitive Intelligence", timeEstimate: "25-35 minutes per competitor", instructions: [ "Enter competitor website URLs", "Analyze traffic sources and volume", "Review audience demographics", "Check referral sources and partnerships", "Note marketing channels and strategies" ], whatToExtract: "Traffic data, audience insights, marketing channels", icon: "globe" }, { id: "facebook-insights", name: "Facebook Audience Insights", url: "https://www.facebook.com/business/insights/audience", purpose: "Social media audience research", category: "Audience Analysis", timeEstimate: "30-40 minutes", instructions: [ "Define your target audience criteria", "Analyze demographics and interests", "Review page likes and behaviors", "Note geographic concentrations", "Identify audience segments" ], whatToExtract: "Demographics, interests, behavior patterns", icon: "users" }, { id: "instagram-shopping", name: "Instagram Shopping", url: "https://business.instagram.com/shopping", purpose: "Social commerce trends analysis", category: "Social Commerce Research", timeEstimate: "20-30 minutes", instructions: [ "Browse relevant product categories", "Note trending products and brands", "Analyze pricing strategies", "Review engagement levels", "Identify influencer partnerships" ], whatToExtract: "Product trends, pricing benchmarks, engagement rates", icon: "instagram" }, { id: "pinterest-trends", name: "Pinterest Trends", url: "https://trends.pinterest.com", purpose: "Visual content and product trend analysis", category: "Visual Trend Research", timeEstimate: "20-30 minutes", instructions: [ "Search for relevant categories", "Review trending pins and boards", "Analyze seasonal content patterns", "Note visual style trends", "Identify content opportunities" ], whatToExtract: "Visual trends, seasonal patterns, content ideas", icon: "image" }, { id: "amazon-bestsellers", name: "Amazon Best Sellers", url: "https://www.amazon.com/bestsellers", purpose: "Product performance and market validation", category: "Product Research", timeEstimate: "30-45 minutes", instructions: [ "Browse relevant product categories", "Note top-selling products and brands", "Analyze pricing and review patterns", "Check product features and benefits", "Identify market gaps" ], whatToExtract: "Top products, pricing data, customer preferences", icon: "package" }, { id: "ebay-trending", name: "eBay Trending", url: "https://www.ebay.com/trending", purpose: "Marketplace trend analysis", category: "Marketplace Research", timeEstimate: "20-30 minutes", instructions: [ "Review trending categories", "Analyze sold listings and prices", "Note successful auction strategies", "Check international market variations", "Identify emerging product categories" ], whatToExtract: "Market trends, pricing data, global variations", icon: "gavel" }, { id: "etsy-trending", name: "Etsy Trending", url: "https://www.etsy.com/trending", purpose: "Handmade and creative market trends", category: "Niche MarketResearch", timeEstimate: "25-35 minutes", instructions: [ "Browse trending searches and products", "Analyze successful shop strategies", "Review pricing for handmade items", "Note seasonal and gift trends", "Identify crafting and DIY opportunities" ], whatToExtract: "Niche trends, creative opportunities, pricing strategies", icon: "heart" }, { id: "chatpdf", name: "ChatPDF", url: "https://chatpdf.com", purpose: "Document analysis and research", category: "Document Research", timeEstimate: "15-25 minutes per document", instructions: [ "Upload relevant industry reports or studies", "Ask specific questions about market data", "Extract key statistics and insights", "Summarize important findings", "Cross-reference with other sources" ], whatToExtract: "Industry data, market statistics, research insights", icon: "file-text" }, { id: "humata", name: "Humata.ai", url: "https://humata.ai", purpose: "AI-powered document chat and analysis", category: "Document Intelligence", timeEstimate: "20-30 minutes per document", instructions: [ "Upload market research documents", "Ask targeted questions about findings", "Request summaries and key insights", "Compare multiple documents", "Export important data points" ], whatToExtract: "Document insights, comparative analysis, key findings", icon: "brain" }, { id: "aithor", name: "AIThor.com", url: "https://aithor.com", purpose: "Deep analysis and content generation", category: "Advanced Analysis", timeEstimate: "30-45 minutes", instructions: [ "Input your research questions or data", "Request comprehensive analysis", "Generate detailed reports", "Verify findings with additional sources", "Integrate insights into business plan" ], whatToExtract: "Deep insights, analytical reports, strategic recommendations", icon: "cpu" }
+        ];
+        
+        /** @type { {id: number, title: string, description: string, tools: string[]}[] } */
+        const researchPhases = [ /* Data remains the same */
+            { id: 1, title: "Market Investigation", description: "Understanding your market landscape and opportunities", tools: ["startup-ai", "validea", "scira-ai", "perplexity"] }, { id: 2, title: "Trend & Niche Identification", description: "Discovering trending opportunities and market gaps", tools: ["particl-trends", "glimpse", "pinterest-trends", "answer-the-public"] }, { id: 3, title: "Competitive Intelligence", description: "Analyzing competitors and market positioning", tools: ["semrush", "similarweb", "facebook-insights", "instagram-shopping"] }, { id: 4, title: "Product & Market Validation", description: "Validating product demand and pricing strategies", tools: ["amazon-bestsellers", "ebay-trending", "etsy-trending", "particl"] }, { id: 5, title: "Advanced Analysis", description: "Deep research and document analysis", tools: ["chatpdf", "humata", "aithor", "answer-socrates"] }
+        ];
+
+
+
+// Notion Template Content
+        const notionTemplateContent = `# 🚀 E-commerce Deep Research Template for Entrepreneurs
+
+*Your comprehensive guide to building a sustainable online business through strategic research and analysis*
+
+---
+
+## 🎯 Overview & Navigation
+
+Welcome to your all-in-one research hub! This template is designed to guide you through every step of validating and launching your e-commerce venture. Whether you're selling products, services, or food, this systematic approach will help you make informed decisions.
+
+### 📋 Quick Navigation
+- Market Investigation
+- Trend and Niche Identification  
+- Decision-Making Analysis
+- Comprehensive Checklist
+- Research Tools Directory
+
+---
+
+## 🔍 Market Investigation
+
+### 📊 Research Framework
+
+#### Step 1: Industry Overview Research
+**Time Required: 2-3 hours**
+
+**Objective**: Understand your market landscape, size, and growth potential
+
+**Research Checklist:**
+- [ ] Industry size and growth rate
+- [ ] Key market segments
+- [ ] Regulatory environment
+- [ ] Seasonal patterns
+- [ ] Geographic considerations
+
+#### Step 2: Target Market Definition
+
+**Demographics Research Table:**
+
+| Demographic Factor | Data Collected | Source | Date Updated |
+|-------------------|----------------|---------|--------------|
+| Age Range | | | |
+| Gender Distribution | | | |
+| Income Level | | | |
+| Geographic Location | | | |
+| Education Level | | | |
+| Lifestyle Preferences | | | |
+| Shopping Behaviors | | | |
+
+**Psychographics Analysis:**
+
+| Factor | Description | Impact on Business |
+|--------|-------------|-------------------|
+| Values | | |
+| Interests | | |
+| Pain Points | | |
+| Shopping Motivations | | |
+| Communication Preferences | | |
+
+#### Step 3: Competitive Landscape Analysis
+
+**Competitor Analysis Matrix:**
+
+| Competitor Name | Market Share | Price Range | Strengths | Weaknesses | Unique Value Prop | Marketing Channels |
+|----------------|--------------|-------------|-----------|------------|-------------------|-------------------|
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+
+**Competitive Intelligence Notes:**
+- **Direct Competitors**: Companies offering identical products/services
+- **Indirect Competitors**: Alternative solutions to the same problem
+- **Substitute Products**: Different approaches to meeting customer needs
+
+#### Step 4: Brand Landscape Research
+
+**Brand Positioning Map:**
+
+| Brand | Price Point | Quality Level | Target Audience | Brand Personality | Market Position |
+|-------|-------------|---------------|-----------------|-------------------|-----------------|
+| | | | | | |
+| | | | | | |
+| | | | | | |
+
+#### Step 5: Profit Margin Analysis
+
+**Product Category Profit Research:**
+
+| Product Category | Average Profit Margin | Price Range | Volume Potential | Difficulty Level |
+|-----------------|----------------------|-------------|------------------|------------------|
+| | | | | |
+| | | | | |
+| | | | | |
+
+---
+
+## 📈 Trend and Niche Identification
+
+### 🔮 Trend Spotting Framework
+
+#### Current Year Trend Analysis
+
+**Emerging Trends Tracker:**
+
+| Trend Name | Relevance Score (1-10) | Supporting Data | Growth Potential | Implementation Difficulty | Timeline |
+|------------|------------------------|-----------------|------------------|--------------------------|----------|
+| AI-Driven Innovations | | | | | |
+| Sustainability Shifts | | | | | |
+| Social Commerce | | | | | |
+| Personalization | | | | | |
+| Health & Wellness | | | | | |
+
+#### Niche Identification Workflow
+
+**Step 1: High-Demand Niche Research**
+**Time Required: 3-4 hours**
+
+**Niche Evaluation Criteria:**
+
+| Niche Option | Market Size | Competition Level | Entry Barriers | Profit Potential | Personal Interest | Final Score |
+|--------------|-------------|-------------------|----------------|------------------|-------------------|-------------|
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+
+**Step 2: Niche Validation Process**
+
+**Validation Checklist:**
+- [ ] Search volume analysis completed
+- [ ] Competition density assessed
+- [ ] Customer pain points identified
+- [ ] Monetization potential confirmed
+- [ ] Market growth trajectory analyzed
+- [ ] Entry barriers evaluated
+
+**Step 3: Trend-Niche Intersection Analysis**
+
+**Opportunity Matrix:**
+
+| Trend | Niche Application | Market Timing | Resource Requirements | Success Probability |
+|-------|-------------------|---------------|----------------------|-------------------|
+| | | | | |
+| | | | | |
+| | | | | |
+
+---
+
+## 💰 Decision-Making Analysis
+
+### 💵 Financial Planning Framework
+
+#### Cost Structure Analysis
+
+**Fixed Costs Calculator:**
+
+| Cost Category | Monthly Amount | Annual Amount | Notes |
+|---------------|----------------|---------------|-------|
+| Business Registration | | | |
+| Website/Platform Fees | | | |
+| Software Subscriptions | | | |
+| Insurance | | | |
+| Legal/Accounting | | | |
+| Marketing Tools | | | |
+| **Total Fixed Costs** | | | |
+
+**Variable Costs Calculator:**
+
+| Cost Category | Per Unit Cost | Volume Estimate | Total Cost | Percentage of Revenue |
+|---------------|---------------|-----------------|------------|----------------------|
+| Product/Service Cost | | | | |
+| Shipping/Delivery | | | | |
+| Payment Processing | | | | |
+| Customer Service | | | | |
+| Marketing/Advertising | | | | |
+| **Total Variable Costs** | | | | |
+
+#### Lifestyle Sustainability Analysis
+
+**Personal Financial Requirements:**
+
+| Expense Category | Monthly Need | Annual Need | Priority Level |
+|------------------|--------------|-------------|----------------|
+| Housing | | | |
+| Food | | | |
+| Transportation | | | |
+| Healthcare | | | |
+| Personal/Family | | | |
+| Emergency Fund | | | |
+| **Total Lifestyle Cost** | | | |
+
+#### Passion-Profit Alignment
+
+**Passion Monetization Framework:**
+
+| Interest/Skill | Market Demand | Monetization Potential | Learning Curve | Time Investment |
+|----------------|---------------|----------------------|----------------|-----------------|
+| | | | | |
+| | | | | |
+| | | | | |
+
+#### Risk Assessment Matrix
+
+**Business Risks Evaluation:**
+
+| Risk Factor | Probability (1-10) | Impact (1-10) | Risk Score | Mitigation Strategy |
+|-------------|-------------------|---------------|------------|-------------------|
+| Market saturation | | | | |
+| Economic downturn | | | | |
+| Supply chain issues | | | | |
+| Technology changes | | | | |
+| Regulatory changes | | | | |
+
+#### Pricing Strategy Analysis
+
+**Pricing Models Comparison:**
+
+| Pricing Model | Description | Pros | Cons | Best For |
+|---------------|-------------|------|------|----------|
+| Cost-Plus | | | | |
+| Value-Based | | | | |
+| Competitive | | | | |
+| Dynamic | | | | |
+| Freemium | | | | |
+
+#### Key Decision Questions
+
+**Strategic Decision Framework:**
+
+1. **Market Timing**: Is this the right time to enter this market?
+   - Answer: ________________
+   - Supporting Evidence: ________________
+
+2. **Resource Allocation**: Do I have sufficient resources (time, money, skills)?
+   - Answer: ________________
+   - Gap Analysis: ________________
+
+3. **Competitive Advantage**: What unique value can I provide?
+   - Answer: ________________
+   - Differentiation Strategy: ________________
+
+4. **Scalability**: Can this business model scale effectively?
+   - Answer: ________________
+   - Scaling Plan: ________________
+
+5. **Exit Strategy**: What are my long-term goals for this business?
+   - Answer: ________________
+   - Timeline: ________________
+
+---
+
+## ✅ Comprehensive Checklist
+
+### Phase 1: Preparation Phase 🎯
+**Estimated Time: 1-2 weeks**
+
+#### Business Foundation
+- [ ] **Define Business Idea** (2-3 hours)
+  - [ ] Write one-sentence business description
+  - [ ] Identify core value proposition
+  - [ ] Define target customer avatar
+  - [ ] Set initial business objectives
+
+- [ ] **Gather Research Tools** (3-4 hours)
+  - [ ] Set up accounts for research platforms
+  - [ ] Install browser extensions for data collection
+  - [ ] Create spreadsheets for data organization
+  - [ ] Set up project management system
+
+### Phase 2: Investigation Phase 🔍
+**Estimated Time: 2-3 weeks**
+
+#### Market Research Deep Dive
+- [ ] **Trend Analysis** (8-10 hours)
+  - [ ] Complete Particl trends analysis
+  - [ ] Research Pinterest trends for visual insights
+  - [ ] Analyze Google Trends via Glimpse
+  - [ ] Document seasonal patterns
+
+- [ ] **Competitor Intelligence** (10-12 hours)
+  - [ ] Identify top 10 direct competitors
+  - [ ] Complete SimilarWeb analysis for each
+  - [ ] Analyze competitor social media presence
+  - [ ] Document pricing strategies
+  - [ ] Map competitive advantages/disadvantages
+
+- [ ] **Customer Research** (6-8 hours)
+  - [ ] Conduct Facebook Audience Insights research
+  - [ ] Analyze customer questions via AnswerThePublic
+  - [ ] Review Amazon/eBay customer reviews
+  - [ ] Create customer persona profiles
+
+#### Financial Preliminary Analysis
+- [ ] **Cost Research** (4-5 hours)
+  - [ ] Research supplier costs and minimums
+  - [ ] Calculate shipping and logistics costs
+  - [ ] Estimate marketing and acquisition costs
+  - [ ] Document all fixed and variable expenses
+
+### Phase 3: Niche Definition Phase 🎯
+**Estimated Time: 1-2 weeks**
+
+#### Market Validation
+- [ ] **Niche Identification** (6-8 hours)
+  - [ ] Complete niche evaluation matrix
+  - [ ] Validate demand using keyword research
+  - [ ] Assess competition density
+  - [ ] Evaluate entry barriers
+
+- [ ] **Demand Validation** (4-6 hours)
+  - [ ] Test minimum viable product concept
+  - [ ] Conduct customer interviews
+  - [ ] Analyze search volume data
+  - [ ] Validate pricing expectations
+
+### Phase 4: Analysis Phase 💰
+**Estimated Time: 1 week**
+
+#### Financial Modeling
+- [ ] **Cost-Benefit Analysis** (4-5 hours)
+  - [ ] Complete detailed cost calculations
+  - [ ] Project revenue scenarios (conservative, realistic, optimistic)
+  - [ ] Calculate break-even point
+  - [ ] Assess ROI projections
+
+- [ ] **Pricing Strategy** (3-4 hours)
+  - [ ] Test different pricing models
+  - [ ] Analyze competitor pricing
+  - [ ] Calculate optimal price points
+  - [ ] Plan promotional pricing strategies
+
+#### Risk Assessment
+- [ ] **Business Risk Evaluation** (2-3 hours)
+  - [ ] Complete risk assessment matrix
+  - [ ] Develop mitigation strategies
+  - [ ] Plan contingency scenarios
+  - [ ] Assess insurance needs
+
+### Phase 5: Review and Iteration Phase 🔄
+**Estimated Time: 1 week**
+
+#### Final Validation
+- [ ] **Comprehensive Review** (4-5 hours)
+  - [ ] Review all research findings
+  - [ ] Test key assumptions
+  - [ ] Validate business model viability
+  - [ ] Adjust strategy based on insights
+
+- [ ] **Prototype Testing** (Variable timing)
+  - [ ] Create minimum viable product
+  - [ ] Test with target customers
+  - [ ] Gather feedback and iterate
+  - [ ] Validate core assumptions
+
+- [ ] **Business Model Finalization** (2-3 hours)
+  - [ ] Document final business model
+  - [ ] Create implementation timeline
+  - [ ] Set success metrics and KPIs
+  - [ ] Plan launch strategy
+
+---
+
+## 🛠️ Research Tools Directory
+
+### Quick Access Tool Links & Instructions
+
+#### Idea Validation Tools
+1. **Startup.ai** - [Visit Site](https://startup.ai)
+   - *Purpose*: Explore evaluated startup ideas
+   - *Time*: 30-45 minutes
+   - *Output*: Validated business concepts
+
+2. **Validea.co** - [Visit Site](https://validea.co)
+   - *Purpose*: AI-powered idea validation
+   - *Time*: 20-30 minutes
+   - *Output*: Validation scores and feedback
+
+#### Market Research Tools
+3. **Scira.ai** - [Visit Site](https://scira.ai)
+   - *Purpose*: AI-powered search engine
+   - *Time*: 15-20 minutes per search
+   - *Output*: Industry insights and data
+
+4. **Perplexity.ai** - [Visit Site](https://perplexity.ai)
+   - *Purpose*: Internet research with AI
+   - *Time*: 20-30 minutes per topic
+   - *Output*: Comprehensive research reports
+
+#### Trend Analysis Tools
+5. **Particl Trends** - [Visit Site](https://pitch.com/v/2025-particls-year-to-date-insights-dbckd6/b43ea207-c75e-4423-b07b-101e0e669c2a/)
+   - *Purpose*: Year-to-date market insights
+   - *Time*: 25-35 minutes
+   - *Output*: Market trends and growth data
+
+6. **Glimpse** - [Visit Site](https://meetglimpse.com/trends/)
+   - *Purpose*: Google Trends analysis
+   - *Time*: 25-35 minutes
+   - *Output*: Trend predictions and patterns
+
+#### Keyword & Content Research
+7. **AnswerThePublic** - [Visit Site](https://answerthepublic.com)
+   - *Purpose*: Keyword and topic research
+   - *Time*: 20-30 minutes
+   - *Output*: Customer questions and content ideas
+
+8. **AnswerSocrates** - [Visit Site](https://answersocrates.com)
+   - *Purpose*: Question-based research
+   - *Time*: 20-25 minutes
+   - *Output*: Pain points and market needs
+
+#### Competitive Intelligence
+9. **Semrush** - [Visit Site](https://semrush.com)
+   - *Purpose*: SEO and competitor analysis
+   - *Time*: 30-45 minutes
+   - *Output*: Competitor strategies and keywords
+
+10. **SimilarWeb** - [Visit Site](https://similarweb.com)
+    - *Purpose*: Website traffic analysis
+    - *Time*: 25-35 minutes per site
+    - *Output*: Traffic data and audience insights
+
+#### Social Media Research
+11. **Facebook Audience Insights** - [Visit Site](https://facebook.com/business/insights/audience)
+    - *Purpose*: Social media audience research
+    - *Time*: 30-40 minutes
+    - *Output*: Demographics and behavior data
+
+12. **Pinterest Trends** - [Visit Site](https://trends.pinterest.com)
+    - *Purpose*: Visual content trends
+    - *Time*: 20-30 minutes
+    - *Output*: Visual trends and seasonal patterns
+
+#### E-commerce Platform Research
+13. **Amazon Best Sellers** - [Visit Site](https://amazon.com/bestsellers)
+    - *Purpose*: Product performance analysis
+    - *Time*: 30-45 minutes
+    - *Output*: Top products and pricing data
+
+14. **eBay Trending** - [Visit Site](https://ebay.com/trending)
+    - *Purpose*: Marketplace trend analysis
+    - *Time*: 20-30 minutes
+    - *Output*: Market trends and pricing
+
+15. **Etsy Trending** - [Visit Site](https://etsy.com/trending)
+    - *Purpose*: Handmade market trends
+    - *Time*: 25-35 minutes
+    - *Output*: Niche trends and creative opportunities
+
+#### Document Analysis Tools
+16. **ChatPDF** - [Visit Site](https://chatpdf.com)
+    - *Purpose*: PDF document analysis
+    - *Time*: 15-25 minutes per document
+    - *Output*: Document insights and data extraction
+
+17. **Humata.ai** - [Visit Site](https://humata.ai)
+    - *Purpose*: AI document chat
+    - *Time*: 20-30 minutes per document
+    - *Output*: Document intelligence and analysis
+
+#### Advanced Analysis
+18. **AIThor** - [Visit Site](https://aithor.com)
+    - *Purpose*: Deep analysis and content generation
+    - *Time*: 30-45 minutes
+    - *Output*: Comprehensive analytical reports
+
+---
+
+## 📝 Research Notes Template
+
+### Daily Research Log
+
+**Date**: ________________
+**Focus Area**: ________________
+**Time Spent**: ________________
+
+#### Key Findings:
+- 
+- 
+- 
+
+#### Questions Raised:
+- 
+- 
+- 
+
+#### Next Steps:
+- 
+- 
+- 
+
+#### Sources Reviewed:
+- 
+- 
+- 
+
+---
+
+## 🎯 Success Metrics Dashboard
+
+### Progress Tracking
+
+| Research Phase | Completion % | Key Insights Gained | Confidence Level | Next Actions |
+|----------------|--------------|-------------------|------------------|--------------|
+| Market Investigation | % | | /10 | |
+| Trend Analysis | % | | /10 | |
+| Competitor Research | % | | /10 | |
+| Financial Analysis | % | | /10 | |
+| Niche Validation | % | | /10 | |
+
+### Business Readiness Score
+
+Calculate your readiness to launch (Rate each 1-10):
+
+- [ ] Market Understanding: ___/10
+- [ ] Competitive Analysis: ___/10  
+- [ ] Financial Planning: ___/10
+- [ ] Target Audience Definition: ___/10
+- [ ] Unique Value Proposition: ___/10
+- [ ] Implementation Plan: ___/10
+
+**Total Score**: ___/60
+
+**Interpretation**:
+- 50-60: Ready to launch
+- 40-49: Minor gaps to address
+- 30-39: Significant research needed
+- Below 30: Continue research phase
+
+---
+
+*Remember: This template is your roadmap to success. Take your time with each section, be thorough in your research, and don't rush the process. Quality research leads to quality business decisions. You've got this! 🚀*`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /** @type {Set<string>} */
+        let completedTools = new Set();
+        /** @type {'grid' | 'list'} */
+        let currentViewMode = 'grid';
+        /** @type {string} */
+        let activeSection = 'overview';
+        
+        const htmlEl = document.documentElement;
+        const themeColorMeta = document.getElementById('theme-color-meta');
+
+        /** @param {string} theme */
+        function applyTheme(theme) {
+            const sunIcons = document.querySelectorAll('.theme-icon-sun');
+            const moonIcons = document.querySelectorAll('.theme-icon-moon');
+            const desktopThemeText = document.getElementById('theme-toggle-desktop-text');
+            const mobileThemeText = document.getElementById('theme-toggle-mobile-text');
+
+            if (theme === 'dark') {
+                htmlEl.classList.add('dark');
+                sunIcons.forEach(icon => icon.classList.remove('hidden'));
+                moonIcons.forEach(icon => icon.classList.add('hidden'));
+                if (desktopThemeText) desktopThemeText.textContent = 'Switch to Light';
+                if (mobileThemeText) mobileThemeText.textContent = 'Switch to Light';
+                if (themeColorMeta) themeColorMeta.content = '#0f172a'; // slate-900
+            } else {
+                htmlEl.classList.remove('dark');
+                sunIcons.forEach(icon => icon.classList.add('hidden'));
+                moonIcons.forEach(icon => icon.classList.remove('hidden'));
+                if (desktopThemeText) desktopThemeText.textContent = 'Switch to Dark';
+                if (mobileThemeText) mobileThemeText.textContent = 'Switch to Dark';
+                if (themeColorMeta) themeColorMeta.content = '#ffffff';
+            }
+            localStorage.setItem('theme', theme);
+            callLucideCreateIcons(); 
+        }
+
+        function initTheme() {
+            const storedTheme = localStorage.getItem('theme');
+            const preferredTheme = globalWindow.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            const currentTheme = storedTheme || preferredTheme;
+            applyTheme(currentTheme);
+        }
+
+        function toggleTheme() {
+            const newTheme = htmlEl.classList.contains('dark') ? 'light' : 'dark';
+            applyTheme(newTheme);
+        }
+        
+        function callLucideCreateIcons() {
+            if (globalWindow.lucide && typeof globalWindow.lucide.createIcons === 'function') {
+                globalWindow.lucide.createIcons();
+            }
+        }
+        
+        function init() {
+            initTheme(); 
+            const saved = localStorage.getItem('completedTools');
+            if (saved) completedTools = new Set(JSON.parse(saved));
+            
+            callLucideCreateIcons();
+            showSection('overview');
+            renderToolsDirectory();
+
+            const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
+            const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+            if(themeToggleDesktop) themeToggleDesktop.addEventListener('click', toggleTheme);
+            if(themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+        }
+
+        function saveProgress() {
+            localStorage.setItem('completedTools', JSON.stringify(Array.from(completedTools)));
+        }
+
+        /** @param {string} sectionId */
+        function showSection(sectionId) {
+            activeSection = sectionId;
+            document.querySelectorAll('.content-section').forEach(section => section.classList.add('hidden'));
+            updateNavigationActive(sectionId);
+
+            const overviewSection = document.getElementById('overview-section');
+            const toolsDirectorySection = document.getElementById('tools-directory-section');
+            const researchSection = document.getElementById('research-section');
+
+            if (sectionId === 'overview' && overviewSection) {
+                overviewSection.classList.remove('hidden');
+            } else if (sectionId === 'tools-directory' && toolsDirectorySection) {
+                toolsDirectorySection.classList.remove('hidden');
+                renderToolsDirectory();
+            } else if (researchSection) {
+                researchSection.classList.remove('hidden');
+                renderResearchSection(sectionId);
+            }
+            globalWindow.scrollTo(0,0);
+        }
+
+        /** @param {string} sectionId */
+        function updateNavigationActive(sectionId) {
+            const commonClassesRemove = ['active', 'bg-pink-50', 'dark:bg-pink-900/30', 'text-pink-700', 'dark:text-pink-400'];
+            const commonClassesAdd = ['text-gray-700', 'dark:text-slate-300'];
+            
+            document.querySelectorAll('.nav-item, .mobile-nav-item').forEach(item => {
+                item.classList.remove(...commonClassesRemove);
+                item.classList.add(...commonClassesAdd);
+            });
+
+            const navSelectors = [
+                `.nav-item[onclick*="showSection('${sectionId}')"]`,
+                `.mobile-nav-item[onclick*="showSection('${sectionId}')"]`
+            ];
+
+            navSelectors.forEach(selector => {
+                const activeItem = document.querySelector(selector);
+                if (activeItem) {
+                    activeItem.classList.remove(...commonClassesAdd);
+                    activeItem.classList.add('active', 'bg-pink-50', 'dark:bg-pink-900/30', 'text-pink-700', 'dark:text-pink-400');
+                }
+            });
+        }
+
+        /** @param {string} sectionId */
+        function renderResearchSection(sectionId) {
+            const phaseMapping = { 'market-investigation': 1, 'trend-identification': 2, 'competitive-analysis': 3, 'product-validation': 4, 'advanced-analysis': 5 };
+            // @ts-ignore
+            const currentPhaseId = phaseMapping[sectionId];
+            if (!currentPhaseId) return;
+            renderProgressChecklist();
+            renderResearchAccordion(currentPhaseId);
+        }
+
+        function renderProgressChecklist() {
+            const container = document.getElementById('progress-checklist');
+            if (!container) return;
+            container.innerHTML = '';
+            researchPhases.forEach(phase => {
+                const phaseTools = phase.tools.map(toolId => researchTools.find(t => t.id === toolId)).filter(Boolean);
+                const completedCount = phaseTools.filter(tool => completedTools.has(tool.id)).length;
+                const progressPercent = phaseTools.length > 0 ? Math.round((completedCount / phaseTools.length) * 100) : 0;
+                const phaseElement = document.createElement('div');
+                phaseElement.className = 'border border-gray-200 dark:border-slate-700 rounded-lg p-4';
+                phaseElement.innerHTML = `
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-semibold text-gray-900 dark:text-slate-100 text-sm">${phase.title}</h3>
+                        <span class="text-xs text-gray-500 dark:text-slate-400">${completedCount}/${phaseTools.length}</span>
+                    </div>
+                    <div class="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2 mb-3">
+                        <div class="progress-bar bg-pink-600 h-2 rounded-full" style="width: ${progressPercent}%"></div>
+                    </div>
+                    <div class="space-y-2">
+                        ${phaseTools.map(tool => tool ? `
+                            <label class="flex items-center text-xs cursor-pointer">
+                                <input type="checkbox" ${completedTools.has(tool.id) ? 'checked' : ''} onchange="toggleToolComplete('${tool.id}')"
+                                    class="mr-2 h-3 w-3 text-pink-600 focus:ring-pink-500 border-gray-300 dark:border-slate-600 rounded dark:bg-slate-700 dark:focus:ring-offset-slate-800">
+                                <span class="${completedTools.has(tool.id) ? 'line-through text-gray-500 dark:text-slate-500' : 'text-gray-700 dark:text-slate-300'}">${tool.name}</span>
+                            </label>` : '').join('')}
+                    </div>`;
+                container.appendChild(phaseElement);
+            });
+            updateOverallProgress();
+        }
+
+        /** @param {number} currentPhaseId */
+        function renderResearchAccordion(currentPhaseId) {
+            const container = document.getElementById('research-accordion');
+            if (!container) return;
+            container.innerHTML = '';
+            researchPhases.forEach(phase => {
+                const isActive = phase.id === currentPhaseId;
+                const phaseTools = phase.tools.map(toolId => researchTools.find(t => t.id === toolId)).filter(Boolean);
+                const accordionElement = document.createElement('div');
+                accordionElement.className = 'bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700';
+                accordionElement.innerHTML = `
+                    <div class="accordion-header p-6 cursor-pointer" onclick="toggleAccordion(${phase.id})">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-pink-100 dark:bg-pink-900/50 rounded-full flex items-center justify-center mr-4">
+                                    <span class="text-pink-600 dark:text-pink-400 font-bold text-sm">${phase.id}</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100">${phase.title}</h3>
+                                    <p class="text-gray-600 dark:text-slate-400 text-sm">${phase.description}</p>
+                                </div>
+                            </div>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 dark:text-slate-500 accordion-icon transition-transform ${isActive ? 'rotate-180' : ''}"></i>
+                        </div>
+                    </div>
+                    <div class="accordion-content ${isActive ? 'active' : ''}" id="accordion-${phase.id}">
+                        <div class="p-6 pt-0">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                ${phaseTools.map(tool => tool ? renderToolCard(tool) : '').join('')}
+                            </div>
+                        </div>
+                    </div>`;
+                container.appendChild(accordionElement);
+            });
+            callLucideCreateIcons();
+        }
+        
+        /** @param {NonNullable<typeof researchTools[0]>} tool */
+        function renderToolCard(tool) {
+            const isCompleted = completedTools.has(tool.id);
+            return `
+                <div class="tool-card bg-gray-50 dark:bg-slate-800/60 rounded-lg p-4 border border-gray-200 dark:border-slate-700 ${isCompleted ? 'bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-700' : ''}">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-white dark:bg-slate-700 rounded-lg flex items-center justify-center mr-3 border dark:border-slate-600">
+                                <i data-lucide="${tool.icon}" class="w-4 h-4 text-gray-600 dark:text-slate-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-slate-100 text-sm">${tool.name}</h4>
+                                <p class="text-xs text-gray-500 dark:text-slate-400">${tool.category}</p>
+                            </div>
+                        </div>
+                        ${isCompleted ? '<i data-lucide="check-circle" class="w-5 h-5 text-green-600 dark:text-green-400"></i>' : ''}
+                    </div>
+                    <p class="text-xs text-gray-600 dark:text-slate-400 mb-3">${tool.purpose}</p>
+                    <div class="flex items-center justify-between text-xs text-gray-500 dark:text-slate-400 mb-3"><span>⏱️ ${tool.timeEstimate}</span></div>
+                    <div class="flex gap-2">
+                        <button onclick="openToolModal('${tool.id}')" class="flex-1 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 text-gray-700 dark:text-slate-300 text-xs font-medium py-2 px-3 rounded transition-colors">📋 Instructions</button>
+                        <a href="${tool.url}" target="_blank" onclick="markToolAsCompleted('${tool.id}')" class="flex-1 bg-pink-600 hover:bg-pink-700 text-white text-xs font-medium py-2 px-3 rounded transition-colors text-center">🚀 Use Tool</a>
+                    </div>
+                </div>`;
+        }
+
+        function renderToolsDirectory() {
+            const container = document.getElementById('tools-grid');
+            if (!container) return;
+            const searchTermInput = /** @type {HTMLInputElement | null} */ (document.getElementById('tool-search'));
+            const categoryFilterSelect = /** @type {HTMLSelectElement | null} */ (document.getElementById('category-filter'));
+            const searchTerm = searchTermInput ? searchTermInput.value.toLowerCase() : '';
+            const categoryFilter = categoryFilterSelect ? categoryFilterSelect.value : '';
+
+            let filteredToolsArr = researchTools.filter(tool => {
+                const matchesSearch = tool.name.toLowerCase().includes(searchTerm) || tool.purpose.toLowerCase().includes(searchTerm) || tool.category.toLowerCase().includes(searchTerm);
+                const matchesCategory = !categoryFilter || tool.category === categoryFilter;
+                return matchesSearch && matchesCategory;
+            });
+
+            if (currentViewMode === 'grid') {
+                container.className = 'grid grid-cols-1 md:grid-cols-2 gap-6';
+                container.innerHTML = filteredToolsArr.map(tool => renderDetailedToolCard(tool)).join('');
+            } else {
+                container.className = 'space-y-4';
+                container.innerHTML = filteredToolsArr.map(tool => renderListToolCard(tool)).join('');
+            }
+            callLucideCreateIcons();
+        }
+
+        /** @param {NonNullable<typeof researchTools[0]>} tool */
+        function renderDetailedToolCard(tool) {
+            const isCompleted = completedTools.has(tool.id);
+            return `
+                <div class="tool-card bg-white dark:bg-slate-800 rounded-lg p-6 border border-gray-200 dark:border-slate-700 shadow-sm ${isCompleted ? 'bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-700' : ''}">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-100 dark:bg-slate-700 rounded-lg flex items-center justify-center mr-4">
+                                <i data-lucide="${tool.icon}" class="w-6 h-6 text-gray-600 dark:text-slate-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 dark:text-slate-100">${tool.name}</h3>
+                                <p class="text-sm text-gray-500 dark:text-slate-400">${tool.category}</p>
+                            </div>
+                        </div>
+                        ${isCompleted ? '<i data-lucide="check-circle" class="w-6 h-6 text-green-600 dark:text-green-400"></i>' : ''}
+                    </div>
+                    <p class="text-gray-600 dark:text-slate-400 text-sm mb-4">${tool.purpose}</p>
+                    <div class="flex items-center text-sm text-gray-500 dark:text-slate-400 mb-4"><i data-lucide="clock" class="w-4 h-4 mr-2"></i><span>${tool.timeEstimate}</span></div>
+                    <div class="flex gap-3">
+                        <button onclick="openToolModal('${tool.id}')" class="flex-1 border border-gray-300 dark:border-slate-600 hover:border-gray-400 dark:hover:border-slate-500 text-gray-700 dark:text-slate-300 font-medium py-2 px-4 rounded-lg transition-colors text-sm">📋 View Instructions</button>
+                        <a href="${tool.url}" target="_blank" onclick="markToolAsCompleted('${tool.id}')" class="flex-1 bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm text-center">🚀 Use Tool</a>
+                    </div>
+                </div>`;
+        }
+
+        /** @param {NonNullable<typeof researchTools[0]>} tool */
+        function renderListToolCard(tool) {
+            const isCompleted = completedTools.has(tool.id);
+            return `
+                <div class="tool-card bg-white dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-700 shadow-sm flex items-center justify-between ${isCompleted ? 'bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-700' : ''}">
+                    <div class="flex items-center flex-1">
+                        <div class="w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-lg flex items-center justify-center mr-4">
+                            <i data-lucide="${tool.icon}" class="w-5 h-5 text-gray-600 dark:text-slate-400"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="font-bold text-gray-900 dark:text-slate-100">${tool.name}</h3>
+                                ${isCompleted ? '<i data-lucide="check-circle" class="w-4 h-4 text-green-600 dark:text-green-400"></i>' : ''}
+                            </div>
+                            <p class="text-sm text-gray-600 dark:text-slate-400 mb-1">${tool.purpose}</p>
+                            <div class="flex items-center gap-4 text-xs text-gray-500 dark:text-slate-400">
+                                <span class="bg-gray-100 dark:bg-slate-700 px-2 py-1 rounded">${tool.category}</span>
+                                <span>⏱️ ${tool.timeEstimate}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 ml-4">
+                        <button onclick="openToolModal('${tool.id}')" class="border border-gray-300 dark:border-slate-600 hover:border-gray-400 dark:hover:border-slate-500 text-gray-700 dark:text-slate-300 font-medium py-2 px-3 rounded-lg transition-colors text-sm">📋 Instructions</button>
+                        <a href="${tool.url}" target="_blank" onclick="markToolAsCompleted('${tool.id}')" class="bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 px-3 rounded-lg transition-colors text-sm">🚀 Use Tool</a>
+                    </div>
+                </div>`;
+        }
+
+        /** @param {string} toolId */
+        function openToolModal(toolId) {
+            const tool = researchTools.find(t => t.id === toolId);
+            if (!tool) return;
+            const modal = document.getElementById('tool-modal');
+            const titleEl = document.getElementById('modal-title');
+            const contentEl = document.getElementById('modal-content');
+            if (modal && titleEl && contentEl) {
+                titleEl.textContent = tool.name;
+                contentEl.innerHTML = `
+                    <div class="space-y-6">
+                        <div><h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">🎯 Purpose</h3><p>${tool.purpose}</p></div>
+                        <div><h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">⏱️ Time Estimate</h3><p>${tool.timeEstimate}</p></div>
+                        <div><h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">📋 Step-by-Step Instructions</h3><ol class="list-decimal list-inside space-y-2">${tool.instructions.map(instruction => `<li>${instruction}</li>`).join('')}</ol></div>
+                        <div><h3 class="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-2">📊 What to Extract</h3><p>${tool.whatToExtract}</p></div>
+                        <div class="border-t border-gray-200 dark:border-slate-700 pt-4">
+                            <a href="${tool.url}" target="_blank" onclick="markToolAsCompleted('${tool.id}'); closeModal();" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-medium py-3 px-4 rounded-lg transition-colors inline-block text-center">🚀 Start Using ${tool.name}</a>
+                        </div>
+                    </div>`;
+                modal.classList.remove('hidden');
+                callLucideCreateIcons();
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('tool-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        /** @param {string} toolId */
+        function markToolAsCompleted(toolId) {
+            completedTools.add(toolId);
+            saveProgress();
+            updateUIAfterProgress();
+        }
+
+        /** @param {string} toolId */
+        function toggleToolComplete(toolId) {
+            if (completedTools.has(toolId)) completedTools.delete(toolId);
+            else completedTools.add(toolId);
+            saveProgress();
+            updateUIAfterProgress();
+        }
+
+        function updateUIAfterProgress() {
+            if (activeSection !== 'overview' && activeSection !== 'tools-directory') {
+                renderResearchSection(activeSection);
+            } else if (activeSection === 'tools-directory') {
+                renderToolsDirectory();
+            }
+             updateOverallProgress(); 
+        }
+        
+        if (typeof globalWindow.confetti === 'undefined') {
+            const confettiScript = document.createElement('script');
+            confettiScript.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js';
+            document.head.appendChild(confettiScript);
+        }
+
+        function updateOverallProgress() {
+            const totalTools = researchTools.length;
+            const completedCount = completedTools.size;
+            const progressPercent = totalTools > 0 ? Math.round((completedCount / totalTools) * 100) : 0;
+            const progressBar = /** @type {HTMLElement | null} */ (document.getElementById('overall-progress-bar'));
+            const progressText = document.getElementById('overall-progress-text');
+
+            if (progressBar) {
+                progressBar.style.width = `${progressPercent}%`;
+                if (progressPercent === 100 && !progressBar.classList.contains('celebrated')) {
+                    progressBar.classList.add('celebrated');
+                    triggerConfetti();
+                } else if (progressPercent < 100) {
+                    progressBar.classList.remove('celebrated');
+                }
+            }
+            if (progressText) progressText.textContent = `${progressPercent}%`;
+        }
+
+        function triggerConfetti() {
+            if (typeof globalWindow.confetti === 'function') {
+                globalWindow.confetti({ particleCount: 400, spread: 155, origin: { y: 0.6 }, colors: ['#ff5e5e', '#ffd166', '#06d6a0', '#118ab2'] });
+                setTimeout(() => { if (globalWindow.confetti) globalWindow.confetti({ particleCount: 200, angle: 60, spread: 155, origin: { x: 0 } }) }, 250);
+                setTimeout(() => { if (globalWindow.confetti) globalWindow.confetti({ particleCount: 200, angle: 120, spread: 155, origin: { x: 1 } }) }, 400);
+            } else {
+                setTimeout(triggerConfetti, 100);
+            }
+        }
+
+        /** @param {number} phaseId */
+        function toggleAccordion(phaseId) {
+            const content = document.getElementById(`accordion-${phaseId}`);
+            if (!content) return;
+            const header = /** @type {HTMLElement | null} */ (content.previousElementSibling);
+            const icon = header ? header.querySelector('.accordion-icon') : null;
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                 if (icon && icon instanceof HTMLElement) icon.style.transform = 'rotate(0deg)';
+            } else {
+                document.querySelectorAll('.accordion-content.active').forEach(acc => {
+                    acc.classList.remove('active');
+                    const otherHeader = /** @type {HTMLElement | null} */ (acc.previousElementSibling);
+                    const otherIcon = otherHeader ? otherHeader.querySelector('.accordion-icon') : null;
+                    if (otherIcon && otherIcon instanceof HTMLElement) otherIcon.style.transform = 'rotate(0deg)';
+                });
+                content.classList.add('active');
+                if (icon && icon instanceof HTMLElement) icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function toggleMobileMenu() {
+            const overlay = document.getElementById('mobile-overlay');
+            const iconEl = document.getElementById('mobile-menu-icon');
+            if (overlay && iconEl) {
+                if (overlay.classList.contains('hidden')) {
+                    overlay.classList.remove('hidden');
+                    iconEl.setAttribute('data-lucide', 'x');
+                } else {
+                    overlay.classList.add('hidden');
+                    iconEl.setAttribute('data-lucide', 'menu');
+                }
+                callLucideCreateIcons();
+            }
+        }
+
+        function filterTools() { renderToolsDirectory(); }
+
+        /** @param {'grid' | 'list'} mode */
+        function setViewMode(mode) {
+            currentViewMode = mode;
+            const gridBtn = document.getElementById('grid-view-btn');
+            const listBtn = document.getElementById('list-view-btn');
+            if (gridBtn && listBtn) {
+                if (mode === 'grid') {
+                    gridBtn.classList.add('bg-white', 'dark:bg-slate-600', 'shadow-sm', 'text-pink-700', 'dark:text-pink-400');
+                    gridBtn.classList.remove('text-gray-700', 'dark:text-slate-300');
+                    listBtn.classList.remove('bg-white', 'dark:bg-slate-600', 'shadow-sm', 'text-pink-700', 'dark:text-pink-400');
+                    listBtn.classList.add('text-gray-700', 'dark:text-slate-300');
+                } else {
+                    listBtn.classList.add('bg-white', 'dark:bg-slate-600', 'shadow-sm', 'text-pink-700', 'dark:text-pink-400');
+                    listBtn.classList.remove('text-gray-700', 'dark:text-slate-300');
+                    gridBtn.classList.remove('bg-white', 'dark:bg-slate-600', 'shadow-sm', 'text-pink-700', 'dark:text-pink-400');
+                    gridBtn.classList.add('text-gray-700', 'dark:text-slate-300');
+                }
+            }
+            renderToolsDirectory();
+        }
+
+        function handleNotionAccess() {
+            const modal = document.getElementById('notion-modal');
+            const contentEl = document.getElementById('notion-template-content');
+            if (modal && contentEl) {
+                contentEl.textContent = notionTemplateContent;
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeNotionModal() { 
+            const modal = document.getElementById('notion-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function copyTemplateToClipboard() {
+            navigator.clipboard.writeText(notionTemplateContent)
+                .then(() => alert('✅ Template copied to clipboard! Now paste it into your Notion page.'))
+                .catch(() => alert('❌ Copy failed. Please select and copy the text manually.'));
+        }
+
+        function downloadTemplateAsFile() {
+            const blob = new Blob([notionTemplateContent], { type: 'text/markdown;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'ecommerce-research-notion-template.md';
+            document.body.appendChild(a); a.click();
+            document.body.removeChild(a); URL.revokeObjectURL(url);
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+
+        globalWindow.onscroll = function() { scrollFunction(); };
+        function scrollFunction() {
+            var backToTopButton = document.getElementById("back-to-top");
+            if (backToTopButton) {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    backToTopButton.style.display = "block";
+                } else {
+                    backToTopButton.style.display = "none";
+                }
+            }
+        }
+        function scrollToTop() {
+            document.body.scrollTop = 0; document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
+</html>
